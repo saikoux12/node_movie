@@ -8,7 +8,7 @@ module.exports = function(grunt){
 				}
 			},
 			js:{
-				files: ['public/js/**','modules/**/*.js','schemas/**/*.js'],
+				files: ['public/js/**','modules/**/*.js','schemas/**/*.js','config/**'],
 				// tasks: ['jshint'],
 				options: {
 					livereload: true
@@ -23,7 +23,7 @@ module.exports = function(grunt){
 					args: [],
 					ignoredFiles: ['README.md', 'node_modules/**', '.DS_Store'],
 					watchedExtensions: ['js'],
-					watchedFolers: ['app', 'config'],
+					watchedFolers: ['./'],
 					debug: true,
 					delayTime: 1,
 					env: {

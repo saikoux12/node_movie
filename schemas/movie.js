@@ -18,7 +18,7 @@ var MovieSchema = new mongoose.Schema({
 			type: Date,
 			default: Date.now()
 		}
-	}
+	}   
 })
 
 MovieSchema.pre('save',function(next){
