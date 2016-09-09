@@ -1,15 +1,23 @@
-var Movie = require('../models/movie')
+var Movie = require('../models/movie');
+var Comment = require('../models/comment');
 var _ = require('underscore');
 
 //detail page
 exports.detail = function(req,res){
     var id = req.params.id;
     Movie.findById(id, function(err, movie){
-    	res.render('detail',{
-    		title: movie.title + '详情',
-    		movie:  movie
-    	})
-    })
+        Comment
+          .find({movie: id})
+          .populate('from','name')
+          .exec(function(err,comments){
+            console.log(comments);
+        	res.render('detail',{
+        		title: movie.title + '详情',
+        		movie:  movie,
+                comments: comments
+        	})
+          })
+    })   
 }
 
 exports.save = function(req,res){

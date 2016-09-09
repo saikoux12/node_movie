@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var MoiveSchema = require('../schemas/movie');
-var Movie = mongoose.model('Movie',MoiveSchema);
+var MovieSchema = require('../schemas/movie');
+var Movie = mongoose.model('Movie',MovieSchema);
 
 module.exports = Movie;

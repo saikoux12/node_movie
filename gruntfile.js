@@ -8,7 +8,7 @@ module.exports = function(grunt){
 				}
 			},
 			js:{
-				files: ['public/js/**','modules/**/*.js','schemas/**/*.js','config/**'],
+				files: ['public/js/**','app/**','config/**'],
 				// tasks: ['jshint'],
 				options: {
 					livereload: true
