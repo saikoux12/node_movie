@@ -57,6 +57,7 @@ exports.save = function(req,res){
         })
     }
 }
+
 exports.update = function(req,res){
     var id = req.params.id;
     console.log(id);
