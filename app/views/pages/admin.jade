@@ -3,12 +3,27 @@ extends ../layout
 block content
   .container
     .row
-      form.form-horizontal(method="post",action="/admin/movie/save")
-        input(type="hidden",name="movie[_id]",value="#{movie._id}")
+      form.form-horizontal(method="post",action="/admin/movie/save",enctype="multipart/form-data")
         .form-group
-          label.col-sm-2.control-label(for="inputCatetory") 电影分类
+          label.col-sm-2.control-label(for="inputCategory") 豆瓣同步
           .col-sm-10
-            input#inputCatetory.col-sm-10.form-control(type="text",name="movie[catetory]",value="#{movie.catetory}")
+            input#douban.col-sm-10.form-control(type="text")
+        if movie._id
+          input(type="hidden",name="movie[_id]",value="#{movie._id}")
+        .form-group
+          label.col-sm-2.control-label(for="inputCategory") 电影分类
+          .col-sm-10
+            input#inputCategory.col-sm-10.form-control(type="text",name="movie[categoryName]",value=movie.categoryName)
+        .form-group
+          label.col-sm-2.control-label(for="inputCategory") 电影分类
+          each cat in categories
+            label.radio-inline
+              if movie._id
+                input(type="radio",name="movie[category]",value="#{cat._id}",checked=cat._id.toString()==movie.category.toString())
+                | #{cat.name}
+              else
+                input(type="radio",name="movie[category]",value="#{cat._id}")
+                | #{cat.name}
         .form-group
           label.col-sm-2.control-label(for="inputTitle") 电影名字
           .col-sm-10
@@ -36,11 +51,12 @@ block content
         .form-group
           label.col-sm-2.control-label(for="inputSummary") 海报地址
           .col-sm-10
-            input#inputSummary.col-sm-10.form-control(type="text",name="movie[poster]",value="#{movie.poster}")
+            input#inputPoster.col-sm-10.form-control(type="text",name="movie[poster]",value="#{movie.poster}")
         .form-group
           label.col-sm-2.control-label(for="inputSummary") 片源地址
           .col-sm-10
-            input#inputSummary.col-sm-10.form-control(type="text",name="movie[flash]",value="#{movie.flash}")
+            input#inputFlash.col-sm-10.form-control(type="text",name="movie[flash]",value="#{movie.flash}")
         .form-group
           .col-sm-offset-2.col-sm-10
             button.btn-btn-default(type="submit") 录入
+  script(src="/js/movie/admin.js")
