@@ -36,6 +36,7 @@ module.exports = function(app){
     app.get('/admin/category/new', User.signinRequired, User.adminRequired, Category.new);
     app.post('/admin/category/save',  User.signinRequired, User.adminRequired,  Category.save);
     app.get('/admin/category/list', User.signinRequired, User.adminRequired, Category.list);
+    app.get('/admin/category/update/:id', User.signinRequired, User.adminRequired, Category.update);
 
     //Results
     app.get('/results',  Index.search);

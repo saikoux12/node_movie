@@ -24,6 +24,7 @@ exports.new = function(req,res){
 
 exports.save = function(req,res){
     var _category = req.body.category;
+    console.log(req.body.category);
     var category = new Category(_category)
     category.save(function(err,category){
         if(err){
@@ -40,9 +41,22 @@ exports.list = function(req,res){
             console.log(err);
         }
        res.render('category_list',{
-            title: '列表',
+            title: '电影分类列表',
              categories: categories
         })
     })
     
+}
+
+exports.update = function(req,res){
+    var id = req.params.id;
+    console.log(id);
+    Category.findById(id,function(err, category){
+        if(id){
+            res.render('category_admin',{
+                title: '分类更新页',
+                category: category
+            })
+        }
+    })
 }
