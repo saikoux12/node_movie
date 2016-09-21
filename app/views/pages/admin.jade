@@ -49,9 +49,13 @@ block content
           .col-sm-10
             input#inputSummary.col-sm-10.form-control(type="text",name="movie[summary]",value="#{movie.summary}")
         .form-group
-          label.col-sm-2.control-label(for="inputSummary") 海报地址
+          label.col-sm-2.control-label(for="inputPoster") 海报地址
           .col-sm-10
             input#inputPoster.col-sm-10.form-control(type="text",name="movie[poster]",value="#{movie.poster}")
+        .form-group
+          label.col-sm-2.control-label(for="uploadPoster") 海报上传
+          .col-sm-10
+            input#uploadPoster.col-sm-10.form-control(type="file",name="uploadPoster")
         .form-group
           label.col-sm-2.control-label(for="inputSummary") 片源地址
           .col-sm-10

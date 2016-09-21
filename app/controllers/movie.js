@@ -1,6 +1,8 @@
 var Movie = require('../models/movie');
 var Comment = require('../models/comment');
 var Category = require('../models/category');
+var fs = require('fs');
+var path = require('path');
 var _ = require('underscore');
 
 //detail page
@@ -22,10 +24,36 @@ exports.detail = function(req,res){
     })   
 }
 
+exports.savePoster = function(req,res,next){
+    var posterData = req.files.uploadPoster;
+    var filePath = posterData.path;
+    var originalFilename = posterData.originalFilename;
+    if(originalFilename){
+        fs.readFile(filePath,function(err,data){
+            var timestamp = Date.now();
+            var type = posterData.type.split('/')[1];
+            var poster = timestamp + '.' + type;
+            var newPath = path.join(__dirname,'../../','/public/upload/' + poster);
+            fs.writeFile(newPath, data, function(err){
+                req.poster = poster;
+                next();
+            });
+        });
+    }else{
+        next();
+    }
+}
+
 exports.save = function(req,res){
     var id = req.body.movie._id;
     var movieObj = req.body.movie;
     var _movie;
+
+    if(req.poster){
+        movieObj.poster = req.poster;
+    }
+    console.log('id')
+    console.log(id)
     if(id){
         Movie.findById(id, function(err, movie){
             if(err){
@@ -36,18 +64,18 @@ exports.save = function(req,res){
                 if(err){
                     console.log(err);
                 }
-                Category.findById(movieObj.category,function(err,category){
-                    if(err){
-                        console.log(err);
-                    }
-                    category.movies.push(movie._id);
-                    category.save(function(err,category){
-                        if(err){  
-                            console.log(err);
-                        }
-                        res.redirect('/movie/' + movie._id);
-                    })
-                })
+                res.redirect('/movie/' + movie._id);
+                // Category.findById(movieObj.category,function(err,category){
+                //     if(err){
+                //         console.log(err);
+                //     }
+                //     category.movies.push(movie._id);
+                //     category.save(function(err,category){
+                //         if(err){  
+                //             console.log(err);
+                //         }
+                //     })
+                // })
             })
         })
     }else{

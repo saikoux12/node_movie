@@ -37,7 +37,7 @@ MovieSchema.statics = {
 	fetch: function(cb){
 		return this
 			.find({})
-			.sort('meta.updateAt')
+			.sort('meta.createAt')
 			.exec(cb);
 	},
 	findById: function(id,cb){

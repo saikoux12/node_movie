@@ -12,7 +12,7 @@ var mongoStore = require('connect-mongo')(session);
 
 var dbUrl = 'mongodb://localhost/node_movie'
 mongoose.connect(dbUrl);
-
+app.use(require('connect-multiparty')());
 app.set('views', './app/views/pages');
 app.set('view engine', 'jade');
 app.use(bodyParser.json());
